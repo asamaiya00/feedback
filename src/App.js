@@ -1,5 +1,8 @@
 import "./App.css";
+import Card from "./components/Card";
 import Header from "./components/Header";
+import ResourceForm from "./components/ResourceForm";
+import data from "./data";
 
 function App() {
   return (
@@ -7,18 +10,14 @@ function App() {
       <Header />
       <div className="container">
         <h2>Resources</h2>
-        <div className="card">
-          <h4>Name</h4>
-          <div className="content">
-            <p className="desc">
-              DescriptionDescriptionDescriptionDescriptionDescriptionDescription
-              DescriptionDescriptionDescriptionDescriptionDescriptionDescription
-              DescriptionDescriptionDescriptionDescriptionDescriptionDescription
-              Description
-            </p>
-            <button className="visit">Visit</button>
-          </div>
-        </div>
+        <ResourceForm />
+        {data.map((info) => (
+          <Card
+            name={info.name}
+            description={info.description}
+            type={info.type}
+          />
+        ))}
       </div>
     </>
   );
