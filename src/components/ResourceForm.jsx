@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import ResourceContext from "../ResourceContext";
 
 const ResourceForm = () => {
+  const { addResource } = useContext(ResourceContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    type: "",
+    type: "Video",
     url: "",
   });
   useEffect(() => {
@@ -15,7 +17,7 @@ const ResourceForm = () => {
     setFormData({
       name: "",
       description: "",
-      type: "",
+      type: "Video",
       url: "",
     });
   };
@@ -27,6 +29,8 @@ const ResourceForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    addResource(formData);
+    clearForm();
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -43,6 +47,7 @@ const ResourceForm = () => {
         <div>
           <label>
             <input
+              checked={formData.type === "Video"}
               type="radio"
               name="type"
               value="Video"
@@ -52,6 +57,7 @@ const ResourceForm = () => {
           </label>
           <label>
             <input
+              checked={formData.type === "Blog"}
               type="radio"
               name="type"
               value="Blog"
@@ -79,7 +85,9 @@ const ResourceForm = () => {
         value={formData.url}
         onChange={handleFormChange}
       />
-      <button id="submit" type="submit">Add Resource</button>
+      <button id="submit" type="submit">
+        Add Resource
+      </button>
     </form>
   );
 };

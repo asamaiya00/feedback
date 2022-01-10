@@ -1,25 +1,18 @@
 import "./App.css";
-import Card from "./components/Card";
 import Header from "./components/Header";
 import ResourceForm from "./components/ResourceForm";
-import data from "./data";
-
+import ResourceList from "./components/ResourceList";
+import { ResourceProvider } from "./ResourceContext";
 function App() {
   return (
-    <>
+    <ResourceProvider>
       <Header />
       <div className="container">
         <h2>Resources</h2>
         <ResourceForm />
-        {data.map((info) => (
-          <Card
-            name={info.name}
-            description={info.description}
-            type={info.type}
-          />
-        ))}
+        <ResourceList />
       </div>
-    </>
+    </ResourceProvider>
   );
 }
 
