@@ -11,6 +11,7 @@ const ResourceList = () => {
           name={info.name}
           description={info.description}
           type={info.type}
+          url={info.url}
         />
       ))}
     </div>

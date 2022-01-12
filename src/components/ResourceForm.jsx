@@ -43,6 +43,9 @@ const ResourceForm = () => {
           value={formData.name}
           onChange={handleFormChange}
           style={{ width: "30%" }}
+          minLength={4}
+          maxLength={32}
+          required
         />
         <div>
           <label>
@@ -79,8 +82,9 @@ const ResourceForm = () => {
       />
       <input
         id="url"
-        type="text"
+        type="url"
         name="url"
+        required
         placeholder="Enter Resource Url"
         value={formData.url}
         onChange={handleFormChange}

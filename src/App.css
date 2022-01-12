@@ -54,19 +54,20 @@ body {
   margin: 0.5rem;
 }
 
+.visit,
 button {
   cursor: pointer;
   background-color: rgb(47, 216, 216);
   color: white;
-  border-radius: 0.5em;
   font-size: large;
+  border-radius: 0.5em;
+  padding: 0.25rem 0.75rem;
+}
+
+button {
   border: none;
   outline: none;
   height: 2rem;
-}
-
-.visit {
-  width: 4rem;
 }
 
 .badge {
@@ -94,8 +95,9 @@ textarea {
   border: grey 1px solid;
   font-family: "Karla";
   font-size: 16px;
+  padding: 0.25rem;
 }
 
-#submit{
+#submit {
   margin: 10px 25%;
 }
