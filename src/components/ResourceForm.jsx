@@ -28,8 +28,10 @@ const ResourceForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    addResource(formData);
+    addResource({
+      id: Math.floor(Math.random() * 100000).toString(),
+      ...formData,
+    });
     clearForm();
   };
   return (

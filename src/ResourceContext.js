@@ -7,8 +7,13 @@ export const ResourceProvider = ({ children }) => {
   const addResource = (newResource) => {
     setResources([...resources, newResource]);
   };
+  const deleteResource = (id) => {
+    setResources(resources.filter((resource) => resource.id !== id));
+  };
   return (
-    <ResourceContext.Provider value={{ resources, addResource }}>
+    <ResourceContext.Provider
+      value={{ resources, addResource, deleteResource }}
+    >
       {children}
     </ResourceContext.Provider>
   );

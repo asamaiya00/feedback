@@ -101,3 +101,11 @@ textarea {
 #submit {
   margin: 10px 25%;
 }
+
+.delete {
+  position: absolute;
+  cursor: pointer;
+  top: 12%;
+  right: 3%;
+  color: red;
+}
