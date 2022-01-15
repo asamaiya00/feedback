@@ -102,10 +102,23 @@ textarea {
   margin: 10px 25%;
 }
 
-.delete {
+.delete,
+.edit {
   position: absolute;
   cursor: pointer;
   top: 12%;
+  color: rgb(180, 180, 180);
+}
+.delete {
   right: 3%;
+}
+.delete:hover {
   color: red;
+}
+
+.edit {
+  right: 6%;
+}
+.edit:hover {
+  color: black;
 }

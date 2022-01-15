@@ -1,17 +1,21 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import ResourceContext from "../ResourceContext";
 
 const ResourceForm = () => {
-  const { addResource } = useContext(ResourceContext);
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    type: "Video",
-    url: "",
-  });
+  const {
+    formData,
+    addResource,
+    updateResource,
+    populateFormData,
+    setFormData,
+  } = useContext(ResourceContext);
   useEffect(() => {
     clearForm();
   }, []);
+
+  useEffect(() => {
+    populateFormData(formData);
+  }, [formData, populateFormData]);
 
   const clearForm = () => {
     setFormData({
@@ -28,10 +32,14 @@ const ResourceForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addResource({
-      id: Math.floor(Math.random() * 100000).toString(),
-      ...formData,
-    });
+    if (!formData.id)
+      addResource({
+        id: Math.floor(Math.random() * 100000).toString(),
+        ...formData,
+      });
+    else {
+      updateResource(formData);
+    }
     clearForm();
   };
   return (
@@ -92,7 +100,7 @@ const ResourceForm = () => {
         onChange={handleFormChange}
       />
       <button id="submit" type="submit">
-        Add Resource
+        {formData.id ? "Edit" : "Add"} Resource
       </button>
     </form>
   );
