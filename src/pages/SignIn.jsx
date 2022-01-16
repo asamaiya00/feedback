@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,9 +16,26 @@ const SignIn = () => {
       [e.target.id]: e.target.value,
     });
   };
+
+  const { email, password } = formData;
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential.user) navigate("/");
+    } catch (error) {
+      toast.error("Check credentials");
+    }
+  };
   return (
     <>
-      <form id="sign">
+      <form id="sign" onSubmit={onSubmit}>
         <input
           id="email"
           type="email"

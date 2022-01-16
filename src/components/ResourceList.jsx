@@ -7,7 +7,7 @@ const ResourceList = () => {
   return (
     <div>
       {resources.map((info) => (
-        <Card resource={info} />
+        <Card key={info.id} resource={info} />
       ))}
     </div>
   );
