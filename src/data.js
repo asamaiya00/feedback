@@ -17,8 +17,8 @@ const data = [
   },
   {
     id: "3",
-    name: "React Demo Video Course",
-    description: "Udemy course with react redux toolkit !",
+    name: "React Playlist Codevolution",
+    description: "React Full Course with Hooks, Typescript !",
     type: "Video",
     url: "https://www.youtube.com/watch?v=QFaFIcGhPoM&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3",
   },
