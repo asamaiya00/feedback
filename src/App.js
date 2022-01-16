@@ -1,18 +1,24 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import Header from "./components/Header";
-import ResourceForm from "./components/ResourceForm";
-import ResourceList from "./components/ResourceList";
-import { ResourceProvider } from "./ResourceContext";
+
 function App() {
   return (
-    <ResourceProvider>
-      <Header />
-      <div className="container">
-        <h2>Resources</h2>
-        <ResourceForm />
-        <ResourceList />
-      </div>
-    </ResourceProvider>
+    <>
+      <Router>
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 

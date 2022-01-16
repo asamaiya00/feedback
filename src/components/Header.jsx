@@ -1,10 +1,17 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="header">
-      <h4>Resource Hub</h4>
+      <Link to="/">
+        <h4>Resource Hub</h4>
+      </Link>
+
       <div className="actions">
-        <h5>Login</h5>
-        <h5 id="signup" >Signup</h5>
+        <Link to="/sign-in">Sign In</Link>
+        <Link to="/sign-up" id="signup">
+          Sign Up
+        </Link>
       </div>
     </header>
   );

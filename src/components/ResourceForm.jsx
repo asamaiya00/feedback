@@ -57,7 +57,7 @@ const ResourceForm = () => {
           maxLength={32}
           required
         />
-        <div>
+        <div style={{display:"flex"}}>
           <label>
             <input
               checked={formData.type === "Video"}
