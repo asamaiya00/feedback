@@ -8,6 +8,7 @@ import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -88,6 +89,7 @@ const SignUp = () => {
         <button id="submit" type="submit">
           Sign Up
         </button>
+        <OAuth />
       </form>
     </>
   );

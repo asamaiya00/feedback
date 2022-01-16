@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ const SignIn = () => {
         <button id="submit" type="submit">
           Sign In
         </button>
+        <OAuth />
       </form>
     </>
   );
