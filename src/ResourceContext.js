@@ -1,21 +1,23 @@
-import { createContext, useState, useEffect, useRef } from "react";
+import { createContext, useState, useEffect } from "react";
 import {
   collection,
   getDocs,
   query,
   orderBy,
-  limit,
   addDoc,
   serverTimestamp,
+  where,
+  doc,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase.config";
 import { toast } from "react-toastify";
 import data from "./data";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 const ResourceContext = createContext();
 export const ResourceProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
   const [resources, setResources] = useState(data);
   const [formData, setFormData] = useState({
     name: "",
@@ -24,73 +26,67 @@ export const ResourceProvider = ({ children }) => {
     url: "",
   });
 
-  const isMounted = useRef(true);
+  const fetchResources = async () => {
+    try {
+      const resourcesRef = collection(db, "resources");
+      const q = query(
+        resourcesRef,
+        orderBy("timestamp", "desc"),
+        where("userRef", "==", getAuth().currentUser?.uid)
+        // limit(10)
+      );
+      const querySnap = await getDocs(q);
+      const resources = [];
+      querySnap.forEach((doc) => {
+        return resources.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+
+      setResources(resources);
+    } catch (error) {
+      toast.error("Could not fetch Resources");
+    }
+  };
 
   useEffect(() => {
-    const fetchResources = async () => {
-      try {
-        const resourcesRef = collection(db, "resources");
-        const q = query(resourcesRef, orderBy("timestamp", "desc"), limit(10));
-        const querySnap = await getDocs(q);
-        const resources = [];
-        querySnap.forEach((doc) => {
-          return resources.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-
-        setResources(resources);
-        setLoading(false);
-      } catch (error) {
-        toast.error("Could not fetch Resources");
-      }
-    };
-
     fetchResources();
-
-    if (isMounted) {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setFormData((prev) => {
-            return {
-              ...prev,
-              userRef: user.uid,
-            };
-          });
-        }
-      });
-    }
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, [isMounted]);
+  }, []);
 
   const addResource = async (newResource) => {
     try {
-      await addDoc(collection(db, "resources"), {
+      const docRef = await addDoc(collection(db, "resources"), {
         ...newResource,
         timestamp: serverTimestamp(),
+        userRef: getAuth().currentUser?.uid,
       });
-      setResources([newResource, ...resources]);
+      setResources([{ id: docRef.id, ...newResource }, ...resources]);
       toast.success("Resource Added !");
     } catch (error) {
       toast.error("Can't add resource");
     }
   };
-  const deleteResource = (id) => {
-    setResources(resources.filter((resource) => resource.id !== id));
+  const deleteResource = async (id) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      await deleteDoc(doc(db, "resources", id));
+      setResources(resources.filter((resource) => resource.id !== id));
+      toast.success("Resource Deleted !");
+    }
   };
-  const updateResource = (formData) => {
+  const updateResource = async (formData) => {
+    const resourceId = formData.id;
+    delete formData.id;
+    await updateDoc(doc(db, "resources", resourceId), formData);
+    fetchResources();
+    toast.success("Resource Updated !");
     const updateResourceValue = {
-      ...resources.find((resource) => resource.id === formData.id),
+      ...resources.find((resource) => resource.id === resourceId),
       ...formData,
     };
     setResources([
       ...resources.map((resource) =>
-        resource.id === formData.id ? updateResourceValue : resource
+        resource.id === resourceId ? updateResourceValue : resource
       ),
     ]);
   };
