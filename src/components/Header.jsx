@@ -1,6 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStatus } from "../hooks/useAuthStatus";
+import Spinner from "./Spinner";
 
 const Header = () => {
   const auth = getAuth();
@@ -11,7 +12,7 @@ const Header = () => {
     navigate("/sign-in");
   };
   if (checkingStatus) {
-    return <h4>loading.....</h4>;
+    return <Spinner />;
   }
   return (
     <header className="header">

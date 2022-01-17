@@ -32,11 +32,7 @@ const ResourceForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.id)
-      addResource({
-        id: Math.floor(Math.random() * 100000).toString(),
-        ...formData,
-      });
+    if (!formData.id) addResource(formData);
     else {
       updateResource(formData);
     }
@@ -57,7 +53,7 @@ const ResourceForm = () => {
           maxLength={32}
           required
         />
-        <div style={{display:"flex"}}>
+        <div style={{ display: "flex" }}>
           <label>
             <input
               checked={formData.type === "Video"}
