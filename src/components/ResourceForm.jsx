@@ -48,7 +48,6 @@ const ResourceForm = () => {
           placeholder="Name"
           value={formData.name}
           onChange={handleFormChange}
-          style={{ width: "30%" }}
           minLength={4}
           maxLength={32}
           required
