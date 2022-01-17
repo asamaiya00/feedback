@@ -11,6 +11,7 @@ const ResourceForm = () => {
   } = useContext(ResourceContext);
   useEffect(() => {
     clearForm();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
