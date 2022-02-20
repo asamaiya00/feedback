@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: "Karla", "Courier New", Courier, monospace;
+  font-family: 'Karla', 'Courier New', Courier, monospace;
   background-color: whitesmoke;
 }
 
@@ -103,7 +103,7 @@ textarea {
   background: #ffffff;
   outline: none;
   border: none;
-  font-family: "Karla";
+  font-family: 'Karla';
   font-size: 16px;
   padding: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.11);
@@ -112,7 +112,7 @@ textarea {
   min-height: 2rem;
 }
 
-[type="radio"] {
+[type='radio'] {
   width: 1rem;
 }
 
@@ -121,7 +121,7 @@ label {
   align-items: center;
 }
 
-#submit {
+#sign > #submit {
   margin: 1rem 25%;
 }
 
@@ -210,7 +210,7 @@ label {
   .edit {
     right: 2.75rem;
   }
-  #submit {
+  #sign > #submit {
     margin: 1rem 20%;
   }
 }
@@ -224,7 +224,7 @@ label {
   #form-container > #name {
     width: 100%;
   }
-  #submit {
+  #sign > #submit {
     margin: 1rem 0;
   }
 }
